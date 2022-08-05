@@ -3,6 +3,7 @@ package br.com.aplicativoestudos;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.Menu;
@@ -29,19 +30,28 @@ public class LoginActivity extends AppCompatActivity {
         btnLogar.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(getApplicationContext(), "Login digitado: "+edtLogin123.getText(), Toast.LENGTH_LONG).show();
+                if(edtLogin123.getText().toString().equals("Aluno") && edtSenha123.getText().toString().equals("123")){
+                    Intent it = new Intent(getApplicationContext(), SegundaTelaActivity.class);
+                    it.putExtra("msg", edtLogin123.getText().toString());
+                    startActivity(it);
+                } else {
+                    Snackbar.make(findViewById(R.id.activity_login), "Usuário e senhas inválidos!", Snackbar.LENGTH_LONG).show();
+                }
 
 
-                Snackbar.make(findViewById(R.id.activity_login),
-                        "Senha digitada: "+edtSenha123.getText(),
-                        Snackbar.LENGTH_LONG).setAction("Ação", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Snackbar.make(findViewById(R.id.activity_login), "acao desfeita", Snackbar.LENGTH_SHORT)
-                                .show();
-                            }
-                        })
-                        .show();
+//                Toast.makeText(getApplicationContext(), "Login digitado: "+edtLogin123.getText(), Toast.LENGTH_LONG).show();
+//
+//
+//                Snackbar.make(findViewById(R.id.activity_login),
+//                        "Senha digitada: "+edtSenha123.getText(),
+//                        Snackbar.LENGTH_LONG).setAction("Ação", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                Snackbar.make(findViewById(R.id.activity_login), "acao desfeita", Snackbar.LENGTH_SHORT)
+//                                .show();
+//                            }
+//                        })
+//                        .show();
             }
         });
     }
